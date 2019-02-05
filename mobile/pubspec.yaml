@@ -1,0 +1,38 @@
+name: devicemanager
+description: Cloud Device Manager
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Adds support for iOS icons
+  cupertino_icons: ^0.1.2
+  # Firebase dependencies
+  cloud_firestore: ^0.8.2
+  firebase_auth: ^0.6.6
+  google_sign_in: ^3.2.4
+  # Device scanner dependencies
+  camera: ^0.2.9
+  firebase_ml_vision: ^0.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
