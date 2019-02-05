@@ -1,0 +1,16 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /devices/{deviceid} {
+      allow read, update, delete: if request.auth.uid == resource.data.owner;
+    }
+    
+    match /device-configs/{deviceid} {
+      allow read, update, delete: if request.auth.uid == resource.data.owner;
+    }
+    
+    match /pending/{deviceid} {
+      allow read, write: if request.auth.uid == resource.data.owner;
+      allow create: if request.auth.uid != null;
+    }
+  }
+}
