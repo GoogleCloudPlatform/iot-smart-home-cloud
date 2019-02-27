@@ -17,4 +17,5 @@
 export const environment = {
   production: false,
   // TODO: ADD YOUR FIREBASE APP CONFIG HERE
+  // TODO: ADD YOUR SMART HOME CLIENT ID HERE
 };

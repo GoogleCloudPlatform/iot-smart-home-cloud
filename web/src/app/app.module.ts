@@ -23,6 +23,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login.component';
 import { DevicesComponent } from './devices.component';
 import { AuthGuard } from './auth.guard';
+import { LinkAccountComponent } from "./link.component";
+import { LinkGuard } from "./link.guard";
+import { ErrorComponent } from './error.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatToolbarModule, MatListModule, MatIconModule, MatSnackBarModule } from '@angular/material';
@@ -35,7 +38,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   declarations: [
     AppComponent,
     LoginComponent,
-    DevicesComponent
+    DevicesComponent,
+    LinkAccountComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFirestoreModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    LinkGuard
   ],
   bootstrap: [AppComponent]
 })

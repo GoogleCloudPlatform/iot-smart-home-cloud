@@ -1,4 +1,4 @@
 {
-    "setpoint": 72,
-    "on": true
+    "setpoint": 25,
+    "mode": "off"
 }

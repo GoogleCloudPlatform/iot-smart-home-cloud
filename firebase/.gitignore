@@ -63,5 +63,8 @@ node_modules/
 # Hosting directory
 public/
 
+# Credentials
+service-account.json
+
 # OS files
 .DS_Store
