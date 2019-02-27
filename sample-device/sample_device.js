@@ -21,7 +21,7 @@ const jwt = require('jsonwebtoken');
 const mqtt = require('mqtt');
 
 const TOKEN_EXP_MINS = 20;
-const DEFAULT_TEMPERATURE = 70;
+const DEFAULT_TEMP_CELSIUS = 20;
 
 var argv = require(`yargs`)
   .options({
@@ -219,12 +219,7 @@ function handleLightConfig(config) {
  * Locally process configuration for a thermostat device
  */
 function handleThermostatConfig(config) {
-  let newState = 'off';
-  if (config.on) {
-    newState = (config.setpoint >= DEFAULT_TEMPERATURE) ? 'heat' : 'cool';
-  }
-
-  switch (newState) {
+  switch (config.mode) {
     case 'off':
       console.log('Setting device state to OFF');
       break;
@@ -240,8 +235,9 @@ function handleThermostatConfig(config) {
   }
 
   return {
-    mode: newState,
-    setpoint: config.setpoint
+    mode: config.mode,
+    setpoint: config.setpoint,
+    ambient: DEFAULT_TEMP_CELSIUS
   };
 }
 

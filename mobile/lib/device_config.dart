@@ -30,7 +30,8 @@ class DeviceConfigPanel extends StatefulWidget {
 /// Send a state change command to the selected device
 class _DeviceConfigState extends State<DeviceConfigPanel> {
 
-  double _configSetpoint;
+  num _configSetpoint;
+  String _configMode;
 
   /// Write the selected values into Firestore device config
   void _updateDeviceConfig() {
@@ -38,14 +39,15 @@ class _DeviceConfigState extends State<DeviceConfigPanel> {
       .document(widget.device.id);
 
     configRef.updateData({
-      'value': widget.device.getUpdatedValue(_configSetpoint.round())
+      'value': widget.device.getUpdatedValue(_configSetpoint, _configMode)
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _configSetpoint = (widget.device.online) ? widget.device.setpointValue.toDouble() : 0.0;
+    _configSetpoint = widget.device.setpoint;
+    _configMode =widget.device.mode;
   }
 
   @override
@@ -62,12 +64,28 @@ class _DeviceConfigState extends State<DeviceConfigPanel> {
             style: textTheme.title),
           Text(widget.device.id,
             style: textTheme.subtitle),
+          DropdownButton<String>(
+            value: _configMode,
+            items: widget.device.availableModes
+              .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value.toUpperCase()),
+                );
+              })
+              .toList(),
+            onChanged: (newValue) {
+              setState(() {
+                _configMode = newValue;
+              });
+            },
+          ),
           Slider(
-            value: _configSetpoint,
-            min: 0.0,
-            max: 100.0,
-            divisions: 20,
-            label: (_configSetpoint > 0) ? "${_configSetpoint.round()}" : 'OFF',
+            value: _configSetpoint.toDouble(),
+            min: widget.device.minSetpoint,
+            max: widget.device.maxSetpoint,
+            divisions: (widget.device.maxSetpoint - widget.device.minSetpoint).round(),
+            label: "${_configSetpoint.round()}",
             onChanged: (newValue) {
               setState(() {
                 _configSetpoint = newValue;

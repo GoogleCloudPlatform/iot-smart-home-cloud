@@ -40,9 +40,14 @@ abstract class Device {
   /// Return a UI status message for the device
   String get deviceStatus;
   /// Report the initial value for the control UI
-  int get setpointValue;
+  num get setpoint;
+  String get mode;
+  /// Boundary conditions for the control UI
+  double get minSetpoint;
+  double get maxSetpoint;
+  List<String> get availableModes;
   /// Return a representation of the new device configuration
-  Map<String, dynamic> getUpdatedValue(int setpoint);
+  Map<String, dynamic> getUpdatedValue(num newSetpoint, String newMode);
 }
 
 /// Implementation of a smart light device
@@ -51,7 +56,7 @@ class LightDevice extends Device {
     : super(id: id, name: name, online: online);
 
   final bool isOn;
-  final int brightness;
+  final num brightness;
 
   LightDevice.fromData(Map<String, dynamic> data, String id)
     : this(
@@ -79,13 +84,21 @@ class LightDevice extends Device {
   }
 
   @override
-  int get setpointValue => this.brightness;
+  num get setpoint => this.brightness;
+  @override
+  double get minSetpoint => 0.0;
+  @override
+  double get maxSetpoint => 100.0;
+  @override
+  String get mode => this.isOn ? 'on' : 'off';
+  @override
+  List<String> get availableModes => ['off', 'on'];
 
   @override
-  Map<String, dynamic> getUpdatedValue(int newSetpoint) =>
+  Map<String, dynamic> getUpdatedValue(num newSetpoint, String newMode) =>
     {
       'brightness': newSetpoint.round(),
-      'on': newSetpoint > 0.0
+      'on': (newMode == 'on')
     };
 }
 
@@ -95,7 +108,7 @@ class ThermostatDevice extends Device {
     : super(id: id, name: name, online: online);
 
   final String mode;
-  final int setpoint;
+  final num setpoint;
 
   ThermostatDevice.fromData(Map<String, dynamic> data, String id)
     : this(
@@ -128,12 +141,16 @@ class ThermostatDevice extends Device {
   }
 
   @override
-  int get setpointValue => this.setpoint;
+  double get minSetpoint => 10.0;
+  @override
+  double get maxSetpoint => 32.0;
+  @override
+  List<String> get availableModes => ['off', 'heat', 'cool'];
 
   @override
-  Map<String, dynamic> getUpdatedValue(int newSetpoint) =>
+  Map<String, dynamic> getUpdatedValue(num newSetpoint, String newMode) =>
     {
       'setpoint': newSetpoint.round(),
-      'on': newSetpoint > 0.0
+      'mode': newMode
     };
 }
