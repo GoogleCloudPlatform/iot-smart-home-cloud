@@ -20,11 +20,11 @@ reflects every configuration message it receives back as a telemtry event.
 
     ```
     $ node sample_device.js
-        --projectId=<your-project-id> \
-        --cloudRegion=<your-cloud-region> \
-        --registryId=<your-registry-id> \
-        --deviceId=<your-device-id> \
+        --projectId=$PROJECT_ID \
+        --cloudRegion=$REGION \
+        --registryId=$REGISTRY \
+        --deviceId=$DEVICE_ID \
         --deviceType=light \
-        --privateKeyFile=./ec_private.pem \
+        --privateKeyFile=$PRIVATE_KEY_FILE \
         --algorithm=ES256
     ```

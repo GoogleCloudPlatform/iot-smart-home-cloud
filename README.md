@@ -20,12 +20,38 @@ for consumer smart home devices.
       [here](https://cloud.google.com/iot/docs/how-tos/credentials/keys#generating_an_es256_key).
    *  Use `device-events` as the **Default telemetry topic**.
 
-   > NOTE: Save the project id, registry id, device id, private key,
-     and telemetry topic name. You will need these values later on.
+1. Save the project values as environment variables so you can use them later on:
+
+   ```
+   $ export PROJECT_ID=my-project
+   $ export REGION=us-central1
+   $ export REGISTRY=my-registry
+   $ export DEVICE_ID=my-device
+   $ export PRIVATE_KEY_FILE=./ec_private.pem
+   ```
 
 1. Visit the [Firebase console](https://console.firebase.google.com/) and click
    **Add Project** from the dashboard. Choose the name of your existing
    Google Cloud project under **Project name**, then select **Add Firebase**.
+
+### Set up Actions on Google
+
+1. Navigate to the [Actions console](http://console.actions.google.com/).
+1. Select **Add/import project**.
+1. Choose the name of your existing Google Cloud project under **Project name**,
+   then select **IMPORT PROJECT**.
+1. Choose **Home control**, followed by **Smart home**.
+1. Select **Setup** → **Invocation** and give your action a name.
+1. Create a unique client id and secret that you will assign to Google for use
+   during smart home account linking.
+
+   ```
+   $ export CLIENT_ID=my-client-id
+   $ export CLIENT_SECRET=my-client-secret
+   ```
+
+> NOTE: These values enable the Google Assistant to identify itself to your action
+  during account linking. This is not used to identify any particular user.
 
 ### Deploy project modules
 
@@ -37,6 +63,35 @@ for consumer smart home devices.
    [Device Manager Mobile](mobile/README.md).
 1. Run a [virtual sample device](sample-device/README.md) as either a light or
    thermostat using the private key generated in the previous step.
+
+### Complete smart home setup
+
+1. Navigate to the [Actions console](http://console.actions.google.com/),
+   and select the your project.
+1. [Configure account linking](https://developers.google.com/actions/identity/oauth2?oauth=code#configure_the_project) for your action.
+   Set **Linking type** to **OAuth** → **Authorization Code**, then enter the
+   following **Client Information**:
+
+   *  **Client ID:** Value exported as `CLIENT_ID` during initial setup.
+   *  **Client secret:** Value generated for `CLIENT_SECRET` during initial setup.
+   *  **Authorization URL:** `https://<your-firebase-hosting-app>/link-account`
+   *  **Token URL:** `https://<your-cloud-functions-url>/token`
+
+1. Click **SAVE**.
+1. [Provide fulfillment](https://developers.google.com/actions/smarthome/create#provide-fulfillment) for your action.
+   Select **Build** → **Actions** from the sidebar and click **ADD YOUR FIRST ACTION**.
+   Enter the following **Fulfillment URL**:
+
+   *  `https://<your-cloud-functions-url>/fulfillment`
+
+1. Click **DONE**.
+
+### Testing your action
+
+Follow [these instructions](https://developers.google.com/actions/smarthome/testing-deploying)
+to enable testing for your smart home action. You can use the
+[Google Home app](https://play.google.com/store/apps/details?id=com.google.android.apps.chromecast.app)
+to link your account and control devices.
 
 ### Handle online status changes (Optional)
 
