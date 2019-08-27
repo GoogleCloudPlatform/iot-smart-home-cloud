@@ -100,6 +100,11 @@ state change events from that device. You can use the following steps to export
 the MQTT logs from [Stackdriver](https://cloud.google.com/stackdriver/),
 which will report connection state changes.
 
+1. Enable logging for IoT Core Registry.
+   *  Navigate to IoT Core Registries page in the Cloud Console.
+   *  Click the ID of the Registry, and then click **EDIT REGISTRY** at the top of the page.
+   *  Under **Stackdriver Logging**, select **Info** log level.
+   *  Click Update.
 1. Visit the [Stackdriver Logs](https://console.cloud.google.com/logs) in the
    Cloud Console.
 1. Enter the following advanced filter:
