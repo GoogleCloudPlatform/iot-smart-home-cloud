@@ -103,7 +103,7 @@ which will report connection state changes.
 1. Enable logging for IoT Core Registry.
    *  Navigate to IoT Core Registries page in the Cloud Console.
    *  Click the ID of the Registry, and then click **EDIT REGISTRY** at the top of the page.
-   *  Under **Stackdriver Logging**, select a log level.
+   *  Under **Stackdriver Logging**, select **Info** log level.
    *  Click Update.
 1. Visit the [Stackdriver Logs](https://console.cloud.google.com/logs) in the
    Cloud Console.
