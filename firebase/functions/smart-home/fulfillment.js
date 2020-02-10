@@ -110,10 +110,12 @@ fulfillment.onExecute(async (body, headers) => {
     return {
       requestId: body.requestId,
       payload: {
-        commands: {
-          ids: command.devices.map(device => device.id),
-          status: 'PENDING'
-        }
+        commands: [
+          {
+            ids: command.devices.map(device => device.id),
+            status: 'PENDING'
+          }
+        ]
       }
     };
   } catch (error) {
