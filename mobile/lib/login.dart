@@ -41,10 +41,11 @@ class _LoginState extends State<LoginScreen> {
     try {
       GoogleSignInAccount googleUser = await _googleSignIn.signIn();
       GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      await _auth.signInWithGoogle(
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
+      await _auth.signInWithCredential(credential);
 
       // Navigate forward on successful login
       Navigator.pushReplacementNamed(context, '/devices');
