@@ -33,8 +33,13 @@ sample.
         smarthome.id=$CLIENT_ID \
         smarthome.secret=$CLIENT_SECRET
     ```
+1. Goto firebase > Project settings > Service accounts 
+    then download new service account key. 
+    rename it as service-account.json 
+    
+2. Upload all files in firebase folder to cloud shell editor along with service-account.json file.
 
-1. Generate a unique string to be used as the HMAC-SHA256 secret to sign and
+3. Generate a unique string to be used as the HMAC-SHA256 secret to sign and
    verify JWT tokens. Add this value to the Firebase config environment:
 
     ```
