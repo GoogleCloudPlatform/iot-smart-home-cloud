@@ -51,12 +51,13 @@ MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4InTLsvDq9KmIW7zbL5cVOnpdHtrXR8+vMqKIgpS82Ts
 
 ### Register a new device
 
-1. Sign in with your Google account
+1. Sign in with your Google account (if mobile app shows a white screen then go to firebase console > Authentication > SignIn Methods > Google and enable it. 
 1. Click the **Add** button to register a new device
 1. Scan the device QR code
 
 After the device has been successfully verified with Cloud IoT Core and
 written to Firestore, it will appear in the device list.
+(If the Device doesn't appear, then check if you deployed functions correctly in firebase and check errors in logs.)
 
 ### Send commands
 
