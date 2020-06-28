@@ -44,6 +44,7 @@ for consumer smart home devices.
 1. Select **Setup** → **Invocation** and give your action a name.
 1. Create a unique client id and secret that you will assign to Google for use
    during smart home account linking.
+   To create go to Cloud Console > APIs and Services > Credentials. Then Click create credentials.
 
    ```
    $ export CLIENT_ID=my-client-id
