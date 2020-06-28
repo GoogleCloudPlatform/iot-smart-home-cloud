@@ -27,14 +27,20 @@ sample.
     ```
 
 1. Add the smart home client id and secret to your Firebase config environment:
+    Client id and Client secret can be taken from Cloud Consol > APIs and Services > Credentials. Now find the firebase service account and copy its ID and Secret.
 
     ```
     $ firebase functions:config:set \
         smarthome.id=$CLIENT_ID \
         smarthome.secret=$CLIENT_SECRET
     ```
+1. Goto firebase > Project settings > Service accounts 
+    then download new service account key. 
+    rename it as service-account.json 
+    
+2. Upload all files in firebase folder to cloud shell editor along with service-account.json file.
 
-1. Generate a unique string to be used as the HMAC-SHA256 secret to sign and
+3. Generate a unique string to be used as the HMAC-SHA256 secret to sign and
    verify JWT tokens. Add this value to the Firebase config environment:
 
     ```
