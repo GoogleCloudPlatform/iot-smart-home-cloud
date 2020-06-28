@@ -27,6 +27,7 @@ sample.
     ```
 
 1. Add the smart home client id and secret to your Firebase config environment:
+    Client id and Client secret can be taken from Cloud Consol > APIs and Services > Credentials. Now find the firebase service account and copy its ID and Secret.
 
     ```
     $ firebase functions:config:set \
